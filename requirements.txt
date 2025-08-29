@@ -1,0 +1,10 @@
+git+https://github.com/palonso/MAEST.git
+torch==2.2.2
+torchaudio
+essentia
+librosa
+matplotlib
+descript-audio-codec
+flask-cors
+# fadtk
+# git+https://github.com/microsoft/fadtk.git
