@@ -242,7 +242,7 @@
                 <div class="parallel-flow">
                     <div class="stream">
                         <div class="stream-label">Source Domain</div>
-                        <div class="component input rect">Tokenized Audio Sequence<br><span class="tensor-info">[B, 9, L]</span></div>
+                        <div class="component input rect">Tokenized Audio Sequence<br><span class="tensor-info">[B, K, L]</span></div>
                         <div class="component input rect">Style Conditioning<br><span class="tensor-info">[B, 400]</span></div>
                         <div class="component input rect">BPM Conditioning<br><span class="tensor-info">[B, 1]</span></div>
                         <div class="arrow">↓</div> <!-- arrow specific to source stream -->
@@ -250,7 +250,7 @@
                     </div>
                     <div class="stream">
                         <div class="stream-label">Target Domain</div>
-                        <div class="component input rect">Tokenized Audio Sequence<br><span class="tensor-info">[B, 9, L]</span></div>
+                        <div class="component input rect">Tokenized Audio Sequence<br><span class="tensor-info">[B, K, L]</span></div>
                         <div class="component input rect">Style Conditioning<br><span class="tensor-info">[B, 400]</span></div>
                         <div class="component input rect">BPM Conditioning<br><span class="tensor-info">[B, 1]</span></div>
                         <div class="arrow">↓</div> <!-- arrow specific to target stream -->
@@ -265,29 +265,29 @@
     <div class="parallel-flow">
         <div class="stream">
             <div class="flow">
-                <div class="component embedding rounded">Embedding Layer (X9)<br><span class="tensor-info">1024→d_model</span></div>
+                <div class="component embedding rounded">Embedding Layer (X9)<br><span class="tensor-info">V→\(d_{model}\)</span></div>
                 <div class="arrow">→</div>
                 <div class="component processing circle">Mean Pooling<br><span class="tensor-info"></span></div>
                 <div class="arrow">→</div>
-                <div class="component processing rounded">PosEnc<br><span class="tensor-info">[B,L,d_model]</span></div>
+                <div class="component processing rounded">PosEnc<br><span class="tensor-info">[B,L,\(d_{model}\)]</span></div>
             </div>
             <div class="flow">
-                <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">400→d_model</span></div>
-                <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">1→d_model</span></div>
+                <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">400→\(d_{model}\)</span></div>
+                <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">1→\(d_{model}\)</span></div>
             </div>
             <div class="arrow">↓</div>
         </div>
         <div class="stream">
             <div class="flow">
-                <div class="component embedding rounded">Embedding Layer (X9)<br><span class="tensor-info">1024→d_model</span></div>
+                <div class="component embedding rounded">Embedding Layer (X9)<br><span class="tensor-info">V→\(d_{model}\)</span></div>
                 <div class="arrow">→</div>
                 <div class="component processing circle">Mean Pooling<br><span class="tensor-info"></span></div>
                 <div class="arrow">→</div>
-                <div class="component processing rounded">PosEnc<br><span class="tensor-info">[B,L,d_model]</span></div>
+                <div class="component processing rounded">PosEnc<br><span class="tensor-info">[B,L,\(d_{model}\)]</span></div>
             </div>
             <div class="flow">
-                <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">400→d_model</span></div>
-                <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">1→d_model</span></div>
+                <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">400→\(d_{model}\)</span></div>
+                <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">1→\(d_{model}\)</span></div>
             </div>
             <div class="arrow">↓</div>
         </div>
@@ -312,7 +312,7 @@
                             <div class="component film rounded" style="font-size: 9px;">BPM γ, β</div>
                         </div>
                     </div>
-                    <div class="component processing rounded">Feed Forward<br><span class="tensor-info">d_model→512→d_model</span></div>
+                    <div class="component processing rounded">Feed Forward<br><span class="tensor-info">\(d_{model}\)→\(d_{ff}\)→\(d_{model}\)</span></div>
                     <div class="component operation rounded">Add & Norm<br><span class="tensor-info">Residual + LayerNorm</span></div>
                     <div class="film-detail">
                         <div class="film-title">FiLM Modulation</div>
@@ -324,7 +324,7 @@
                 </div>
             </div>
             <div class="arrow">↓</div>
-            <div class="component latent rect">Source Representation<br><span class="tensor-info">[B, L, d_model]</span></div>
+            <div class="component latent rect">Source Representation<br><span class="tensor-info">[B, L, \(d_{model}\)]</span></div>
             <div class="arrow">↓</div>
         </div>
         <div class="stream">
@@ -340,7 +340,7 @@
                             <div class="component film rounded" style="font-size: 9px;">BPM γ, β</div>
                         </div>
                     </div>
-                    <div class="component processing rounded">Feed Forward<br><span class="tensor-info">d_model→512→d_model</span></div>
+                    <div class="component processing rounded">Feed Forward<br><span class="tensor-info">\(d_{model}\)→\(d_{ff}\)→\(d_{model}\)</span></div>
                     <div class="component operation rounded">Add & Norm<br><span class="tensor-info">Residual + LayerNorm</span></div>
                     <div class="film-detail">
                         <div class="film-title">FiLM Modulation</div>
@@ -352,7 +352,7 @@
                 </div>
             </div>
             <div class="arrow">↓</div>
-            <div class="component latent rect">Target Representation<br><span class="tensor-info">[B, L, d_model]</span></div>
+            <div class="component latent rect">Target Representation<br><span class="tensor-info">[B, L,\(d_{model}\)]</span></div>
             <div class="arrow">↓</div>
 
         </div>
@@ -365,7 +365,7 @@
         <div class="parallel-flow">
             <div class="morph-section">
                 <div class="morph-title">Latent Interpolation Layer</div>
-                <div class="morph-equation">z<sub>morph</sub> = (1 - α) · z<sub>source</sub> + α · z<sub>target</sub></div>
+                <div class="morph-equation"><span>\(z_{morph} = (1-\alpha) z_{s} + \alpha z_{t}\)</span></div>
                 <div class="tensor-info" style="margin-top: 8px;">α ∈ [0,1] controls morphing ratio</div>
             </div>
         </div>
@@ -383,9 +383,9 @@
                 <div class="stage-label">DECODER STAGE</div>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
                     <div class="flow">
-                        <div class="component latent rect">Target Representation<br><span class="tensor-info">[B, L, d_model]</span></div>
-                        <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">[B, d_model]</span></div>
-                        <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">[B, d_model]</span></div>
+                        <div class="component latent rect">Target Representation<br><span class="tensor-info">[B, L,\(d_{model}\)]</span></div>
+                        <div class="component conditioning rect">Style Embedding<br><span class="tensor-info">[B, \(d_{model}\)]</span></div>
+                        <div class="component conditioning rect">BPM Embedding<br><span class="tensor-info">[B, \(d_{model}\)]</span></div>
                     </div>
                     
                     <div class="arrow">↓</div>
@@ -393,7 +393,7 @@
                     <div class="decoder-detail">
                         <div style="text-align: center; font-weight: bold; margin-bottom: 15px;">Transformer Decoder (×6)</div>
                         <div class="flow" style="flex-direction: column; gap: 10px;">
-                            <div class="component processing rect">Decoder Input + PosEnc<br><span class="tensor-info">[B, L_target, d_model]</span></div>
+                            <div class="component processing rect">Decoder Input + PosEnc<br><span class="tensor-info">[B, \(L_t\), \(d_{model}\)]</span></div>
                             <div class="component attention rounded">Masked Self-Attention<br><span class="tensor-info">Causal Mask</span></div>
                             <div class="component operation rounded">Add & Norm<br><span class="tensor-info">Residual + LayerNorm</span></div>
                             <div class="film-detail">
@@ -412,7 +412,7 @@
                                     <div class="component film rounded" style="font-size: 9px;">BPM γ, β</div>
                                 </div>
                             </div>
-                            <div class="component processing rounded">Feed Forward<br><span class="tensor-info">d_model→512→d_model</span></div>
+                            <div class="component processing rounded">Feed Forward<br><span class="tensor-info">\(d_{model}\)→\(d_{ff}\)→\(d_{model}\)</span></div>
                             <div class="component operation rounded">Add & Norm<br><span class="tensor-info">Residual + LayerNorm</span></div>
                             <div class="film-detail">
                                 <div class="film-title">FiLM Modulation</div>
@@ -433,11 +433,11 @@
                         <div class="head">...</div>
                         <div class="head">Head 9</div>
                     </div>
-                    <div class="tensor-info">9 output heads: Linear(d_model → 1024) per DAC codebook</div>
+                    <div class="tensor-info">9 output heads: Linear(\(d_{model}\) → V) per DAC codebook</div>
                     
                     <div class="arrow">↓</div>
                     
-                    <div class="component output rect">Predicted Logits for Each Codebook<br><span class="tensor-info">[B, 9, L_target, 1024]</span></div>
+                    <div class="component output rect">Predicted Logits for Each Codebook<br><span class="tensor-info">[B, K, \(L_t\), V]</span></div>
                 </div>
             </div>
         </div>
@@ -482,17 +482,42 @@
                 <span>Output</span>
             </div>
         </div>
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
         
-        <!-- Key Equations -->
-        <div style="margin-top: 25px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
-            <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Key Mathematical Operations</div>
-            <div style="font-size: 11px; line-height: 1.6; font-family: 'Computer Modern', monospace;">
-                <strong>FiLM Conditioning:</strong> y = γ ⊙ x + β<br>
-                <strong>Combined FiLM:</strong> y = x + (γ₁⊙x + β₁ - x) + (γ₂⊙x + β₂ - x)<br>
-                <strong>Latent Interpolation:</strong> z<sub>morph</sub> = (1-α)z<sub>src</sub> + αz<sub>tgt</sub><br>
-                <strong>Multi-Head Attention:</strong> Attention(Q,K,V) = softmax(QK<sup>T</sup>/√d<sub>k</sub>)V
-            </div>
-        </div>
+<!-- Key Equations -->
+<!-- <div style="margin-top: 25px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
+    <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Key Mathematical Operations</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 11px; font-family: 'Computer Modern', monospace; line-height: 1.6;">
+        <div style="width: 48%;"><strong>FiLM Conditioning:</strong> <span>\(y(x_{emb},c) = \gamma(c) \odot x_{emb} + \beta(c)\)</span></div>
+        <div style="width: 48%;"><strong>Combined FiLM:</strong> <span>\(x_{\text{out}} = x_{emb} + (\text{FiLM}_{\sigma}(x_{emb},c_\sigma)-x_{emb}) + (\text{FiLM}_{\text{b}}(x_{emb},c_b) - x_{emb})\)</span></div>
+        <div style="width: 48%; margin-top: 10px;"><strong>Latent Interpolation:</strong> <span>\(z_{morph} = (1-\alpha) z_{s} + \alpha z_{t}\)</span></div>
+        <div style="width: 48%; margin-top: 10px;"><strong>Multi-Head Attention:</strong> <span>\(\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V\)</span> (here, K refers to keys, not the number of codebooks)</div>
+    </div>
+</div> -->
+
+        <!-- Legend -->
+<div style="margin-top: 15px; padding: 10px; background: #f1f1f1; border: 1px solid #ccc; border-radius: 4px; font-size: 11px; font-family: 'Computer Modern', monospace;">
+    <strong>Legend:</strong>
+    <div style="font-size: 11px; font-family: 'Computer Modern', monospace; line-height: 1.4;">
+        <strong>B</strong>: batch size &nbsp;|&nbsp; 
+        <strong>L</strong>: maximum sequence length (input) &nbsp;|&nbsp;
+        <strong>\(L_t\)</strong>: maximum sequence length (target) &nbsp;|&nbsp;  
+        <strong>t</strong>: target codes &nbsp;|&nbsp; 
+        <strong>K</strong>: number of codebooks &nbsp;|&nbsp; 
+        <strong>\(d_{model}\)</strong>: transformer embedding dimension &nbsp;|&nbsp; 
+        <strong>\(d_{ff}\)</strong>: feed-forward network hidden dimension &nbsp;|&nbsp; 
+        <strong>s</strong>: source codes &nbsp;|&nbsp; 
+        <strong>h</strong>: number of attention heads &nbsp;|&nbsp; 
+        <strong>V</strong>: vocabulary size of each codebook
+    </div>
+    
+</div>
+
+        
     </div>
 </body>
 </html>
