@@ -1,6 +1,6 @@
 # Conditioned Morpher Transformer model (CMT)
 
-As part of the methodological experiments of the [Freesound Loop Generator](https://github.com/AdaSalvadorAvalos/freesound-loop-generator/tree/main), a custom Transformer model, the Conditioned Morpher Transformer (CMT), was developed to perform audio loop morphing with explicit conditioning on style and tempo. This model extends the capabilities of the pre-trained [RAVE model](https://github.com/acids-ircam/RAVE) by enabling smooth interpolation between audio loops while controlling perceptual attributes.
+As part of the methodological experiments of the [Freesound Loop Generator](https://github.com/AdaSalvadorAvalos/freesound-loop-generator/tree/main), a custom transformer model, the Conditioned Morpher Transformer (CMT), was developed to perform audio loop morphing with explicit conditioning on style and tempo. This model extends the capabilities of the pre-trained [RAVE model](https://github.com/acids-ircam/RAVE) by enabling smooth interpolation between audio loops while controlling perceptual attributes.
 
 ![CMT Architecture](assets/overview_model.jpg)
 
