@@ -66,7 +66,7 @@ python train.py
 
 Inside the script, you can modify the configuration parameters to suit your needs.
 
-1. Directory Setup. The script automatically sets up directories for embeddings, style probabilities, and checkpoints:
+1. **Directory Setup.** The script automatically sets up directories for embeddings, style probabilities, and checkpoints:
 
 ```
 embeddings_dir = "../output_preprocess_mix_DAC7000/encoded"
@@ -78,7 +78,7 @@ os.makedirs(save_dir, exist_ok=True)
 - `prob_dir`: Path to style probability data.
 - `save_dir`: Directory to save model checkpoints.
 
-2. Model Parameters. These parameters define the architecture of the Transformer-style model used for encoding and morphing audio.
+2. **Model Parameters.** These parameters define the architecture of the Transformer-style model used for encoding and morphing audio.
 ```
 model_params = {
     'num_codebooks': 9,
@@ -94,7 +94,7 @@ model_params = {
 }
 ```
 
-3. Training Parameters
+3. **Training Parameters.**
 Training is configured for stability and memory efficiency:
 ```
 train_params = {
