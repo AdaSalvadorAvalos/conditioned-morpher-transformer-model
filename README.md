@@ -34,18 +34,18 @@ python preprocess.py --input_dir <INPUT_DIR> --metadata <METADATA_FILE> [options
 ```
 
 Required arguments:
-- --input_dir <INPUT_DIR>: Directory containing WAV files.
-- --metadata <METADATA_FILE>: Path to metadata.json file.
+- `--input_dir` <INPUT_DIR>: Directory containing WAV files.
+- `--metadata` <METADATA_FILE>: Path to metadata.json file.
 
 Optional Arguments:
-- --output_dir <OUTPUT_DIR>: Directory for processed files (default: DAC_output).
-- --num_files <N>: Number of files to process (default: all).
-- --preserve_bpm: Preserve original BPM instead of normalizing.
-- --min_bpm <FLOAT>: Minimum BPM for filtering (default: 120).
-- --max_bpm <FLOAT>: Maximum BPM for filtering (default: 130).
-- --filter_by_bpm: Filter files by BPM range.
-- --shuffle: Randomly shuffle files before processing.
-- --seed <INT>: Random seed for shuffling (default: 42)
+- `--output_dir` <OUTPUT_DIR>: Directory for processed files (default: DAC_output).
+- `--num_files` <N>: Number of files to process (default: all).
+- `--preserve_bpm`: Preserve original BPM instead of normalizing.
+- `--min_bpm` <FLOAT>: Minimum BPM for filtering (default: 120).
+- `--max_bpm` <FLOAT>: Maximum BPM for filtering (default: 130).
+- `--filter_by_bpm`: Filter files by BPM range.
+- `--shuffle`: Randomly shuffle files before processing.
+- `--seed` <INT>: Random seed for shuffling (default: 42)
 
 #### Examples
 Using the [Freesound Loop Dataset](https://zenodo.org/records/3967852):
@@ -74,9 +74,9 @@ prob_dir = "../output_preprocess_mix_DAC7000/style_probs"
 save_dir = "trial"  # Directory where checkpoints are saved
 os.makedirs(save_dir, exist_ok=True)
 ```
-- embeddings_dir: Path to preprocessed audio embeddings.
-- prob_dir: Path to style probability data.
-- save_dir: Directory to save model checkpoints.
+- `embeddings_dir`: Path to preprocessed audio embeddings.
+- `prob_dir`: Path to style probability data.
+- `save_dir`: Directory to save model checkpoints.
 
 2. Model Parameters. These parameters define the architecture of the Transformer-style model used for encoding and morphing audio.
 ```
@@ -104,10 +104,10 @@ train_params = {
     'accumulation_steps': 8  # Effective batch size of 32
 }
 ```
-- batch_size: Number of samples per GPU step.
-- learning_rate: Optimizer learning rate.
-- num_epochs: Total number of training epochs.
-- accumulation_steps: Gradients are accumulated for effective larger batch size without exceeding memory limits.
+- `batch_size`: Number of samples per GPU step.
+- `learning_rate`: Optimizer learning rate.
+- `num_epochs`: Total number of training epochs.
+- `accumulation_steps`: Gradients are accumulated for effective larger batch size without exceeding memory limits.
 
 
 
@@ -117,19 +117,19 @@ Generate morphed audio between a source and a target WAV file using a trained mo
 python inference.py --checkpoint <CHECKPOINT> --source_file <SOURCE_WAV> --target_file <TARGET_WAV> --output_dir <OUTPUT_DIR> [options]
 ````
 Required Arguments
-- --checkpoint <CHECKPOINT>: Path to the trained model checkpoint.
-- --source_file <SOURCE_WAV>: Path to the source audio file (WAV).
-- --target_file <TARGET_WAV>: Path to the target audio file (WAV).
-- --output_dir <OUTPUT_DIR>: Directory where the output DAC file will be saved.
+- `--checkpoint` <CHECKPOINT>: Path to the trained model checkpoint.
+- `--source_file` <SOURCE_WAV>: Path to the source audio file (WAV).
+- `--target_file` <TARGET_WAV>: Path to the target audio file (WAV).
+- `--output_dir` <OUTPUT_DIR>: Directory where the output DAC file will be saved.
 
 Optional Arguments
-- --morph_ratio <FLOAT>: Morph ratio between 0.0 (source) and 1.0 (target).
-- --target_style <STYLE_LABELS>: One or more target genre/style labels.
-- --target_style_file <WAV_FILE>: Path to a WAV file to use for target style reference.
-- --target_bpm <FLOAT>: Optional target BPM for the output.
-- --gradient_mode: Generate a sequence of intermediate morphs instead of a single output.
-- --num_steps <INT>: Number of intermediate steps to generate in gradient mode (default: 10).
-- --cpu: Force the model to run on CPU even if GPU is available.
+- `--morph_ratio` <FLOAT>: Morph ratio between 0.0 (source) and 1.0 (target).
+- `--target_style` <STYLE_LABELS>: One or more target genre/style labels.
+- `--target_style_file` <WAV_FILE>: Path to a WAV file to use for target style reference.
+- `--target_bpm` <FLOAT>: Optional target BPM for the output.
+- `--gradient_mode`: Generate a sequence of intermediate morphs instead of a single output.
+- `--num_steps` <INT>: Number of intermediate steps to generate in gradient mode (default: 10).
+- `--cpu`: Force the model to run on CPU even if GPU is available.
 
 #### Examples
 Generate a single morphed file with 50% morph ratio:
