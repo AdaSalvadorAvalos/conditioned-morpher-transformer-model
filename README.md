@@ -3,6 +3,8 @@
 As part of the methodological experiments of the [Freesound Loop Generator](https://github.com/AdaSalvadorAvalos/freesound-loop-generator/tree/main), a custom transformer model, the Conditioned Morpher Transformer (CMT), was developed to perform audio loop morphing with explicit conditioning on style and tempo. This model extends the capabilities of the pre-trained [RAVE model](https://github.com/acids-ircam/RAVE) by enabling smooth interpolation between audio loops while controlling perceptual attributes.
 
 ![CMT Architecture](assets/overview_model.jpg)
+*Overview of the model. Source ($s$) and target ($t$) inputs ($x$) are encoded ($E$) into latent space representations and decoded ($D$) into output ($\hat y$). Source ($z_s$) and target ($z_t$) latent representations are interpolated using $\alpha \in [0,1]$ to produce $z_{morph}$. Conditioning vectors include $c_s = [b_s,\sigma_s]$, $c_t = [b_t,\sigma_t]$, and $c_{decoder} = [b_{decoder},\sigma_{decoder}]$, with $c_{decoder} \in \{c_{custom},c_t\}$. Where $\sigma$ and $b$ represent the style and BPM vectors, respectively.*
+
 
 The CMT architecture is based on a transformer encoder–decoder, augmented with **dual FiLM conditioning** for style and BPM:
 
