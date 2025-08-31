@@ -1,6 +1,6 @@
 # Conditioned Morpher Transformer model (CMT)
 
-As part of the methodological experiments of the [Freesound Loop Generator](https://github.com/AdaSalvadorAvalos/freesound-loop-generator/tree/main), a custom Transformer model, the Conditioned Morpher Transformer (CMT), was developed to perform audio loop morphing with explicit conditioning on style and tempo. This model extends the capabilities of the pretrained RAVE model by enabling smooth interpolation between audio loops while controlling perceptual attributes.
+As part of the methodological experiments of the [Freesound Loop Generator](https://github.com/AdaSalvadorAvalos/freesound-loop-generator/tree/main), a custom Transformer model, the Conditioned Morpher Transformer (CMT), was developed to perform audio loop morphing with explicit conditioning on style and tempo. This model extends the capabilities of the pre-trained RAVE model by enabling smooth interpolation between audio loops while controlling perceptual attributes.
 
 ![CMT Architecture](assets/overview_model.jpg)
 
@@ -58,7 +58,7 @@ Filter files by BPM between 125–130:
 python process.py FSL10K/audio/wav --metadata FSL10K/metadata.json --filter_by_bpm --min_bpm 125 --max_bpm 130
 ```
 
-### Training the model
+### Training
 To train the model run:
 ```
 python train.py
@@ -78,7 +78,7 @@ os.makedirs(save_dir, exist_ok=True)
 - `prob_dir`: Path to style probability data.
 - `save_dir`: Directory to save model checkpoints.
 
-2. **Model Parameters.** These parameters define the architecture of the Transformer-style model used for encoding and morphing audio.
+2. **Model Parameters.** These parameters define the architecture of the model used for encoding and morphing audio.
 ```
 model_params = {
     'num_codebooks': 9,
@@ -112,7 +112,7 @@ train_params = {
 
 
 ### Inference
-Generate morphed audio between a source and a target WAV file using a trained model by running:
+Generate morphed audio between a source and a target WAV file using a pre-trained model by running:
 ````
 python inference.py --checkpoint <CHECKPOINT> --source_file <SOURCE_WAV> --target_file <TARGET_WAV> --output_dir <OUTPUT_DIR> [options]
 ````
