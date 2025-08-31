@@ -4,11 +4,11 @@ As part of the methodological experiments of the [Freesound Loop Generator](http
 
 ![CMT Architecture](assets/overview_model.jpg)
 
-The CMT architecture is based on a transformer encoder-decoder, augmented with separate FiLM conditioning layers for style and BPM:
-- **Encoder**: Encodes audio tokens through multiple codebook embeddings and applies FiLM-based modulation for style and BPM.
-- **FiLM Layers**: Independently modulate feature representations according to style and BPM.
+The CMT architecture is based on a transformer encoder–decoder, augmented with **dual FiLM conditioning** for style and BPM:
+
+- **Encoder**: Encodes audio tokens via multiple codebook embeddings and applies FiLM-based modulation (style + BPM).
 - **Interpolation**: Combines source and target representations through linear interpolation to achieve the desired morph.
-- **Decoder**: Generates output token logits using cross-attention on the interpolated representation, with additional FiLM modulation for style and BPM.
+- **Decoder**: Generates output token logits using cross-attention on the interpolated representation, with FiLM modulation (style + BPM).
 
 This design allows flexible morphing of audio loops, producing outputs that can be smoothly transitioned between source and target while respecting style and tempo parameters.
 
